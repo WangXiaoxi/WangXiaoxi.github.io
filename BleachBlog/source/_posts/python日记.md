@@ -8,3 +8,11 @@ tags: python
 
 __正如所言：__*`只用一种方式解决问题`*
 
+看到这段儿代码时，深深地被吸引到了
+
+    def triangles():
+	    b = [1]
+	    while True:
+	        yield b
+	        b = [1] + [b[i] + b[i+1] for i in range(len(b)-1)] + [1]
+	
