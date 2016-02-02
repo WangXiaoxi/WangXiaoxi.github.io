@@ -13,3 +13,9 @@ tags: words
 8. entries 条目
 9. literals n.字面值；文字
 10. interpolate vi.插入；篡改
+11. encapsulate 概括包含
+
+##new
+1. candidates 候选人
+2. simultaneously 同时的
+
