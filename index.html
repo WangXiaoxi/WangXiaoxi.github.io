@@ -1,0 +1,785 @@
+
+ <!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  
+    <title>西境时光</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="wangxi">
+    
+
+    
+    <meta property="og:type" content="website">
+<meta property="og:title" content="西境时光">
+<meta property="og:url" content="http://fruitsbasket.cc/index.html">
+<meta property="og:site_name" content="西境时光">
+<meta property="og:locale" content="default">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="西境时光">
+
+    
+    <link rel="alternative" href="/atom.xml" title="西境时光" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/avatar.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="西境时光">西境时光</a></h1>
+				<h2 class="blog-motto">Practice makes perfect</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="hidden" name="q" value="site:fruitsbasket.cc">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main">
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2017/01/19/iOS与Android中，给View设置优先级/" title="iOS与Android中，给View设置优先级" itemprop="url">iOS与Android中，给View设置优先级</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="wangxi" target="_blank" itemprop="author">wangxi</a>
+		
+  <p class="article-time">
+    <time datetime="2017-01-18T16:06:02.000Z" itemprop="datePublished"> Published 2017-01-19</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>在开发中，常常会有这样的需求 <code>[-10-Label-5-Icon-10-]</code>，水平放置一个 Label 与一个 Icon（或 Label ），其中第一个长度不固定，后面的 Icon 紧随 Label 动态调整，但是不能超出屏幕范围，同时要保证位于右边的 Icon（或 Label ）不被压缩。</p>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>iOS 上只需要设置约束的优先级与压缩阻力的属性，视图在绘制的时候会做好这一切的。<br>Android 的小伙伴在此遇到了麻烦，最后妥协于 HardCode。<br>个人感觉 Android 的布局机制是要更优于 iOS 的（其实我是卧底😅），更不愿看 HardCode 解决此类问题。下班回家后操起已尘封的 AS，几番尝试后，答案还是很显而易见的。</p>
+<h2 id="Android-XML文件配置"><a href="#Android-XML文件配置" class="headerlink" title="Android XML文件配置"></a>Android XML文件配置</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">android.support.v7.widget.LinearLayoutCompat</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span> // 此处注意使用 <span class="attr">wrap_content</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_height</span>=<span class="string">"20dp"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:orientation</span>=<span class="string">"horizontal"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">TextView</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_height</span>=<span class="string">"20dp"</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:text</span>=<span class="string">"hahahahahhahahaaaaaahahhaaaaaaaaaaaaaaaaa"</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:ellipsize</span>=<span class="string">"end"</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_weight</span>=<span class="string">"1"</span> // 设置权重</span></span><br><span class="line"><span class="tag">            /&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">Button</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_width</span>=<span class="string">"20dp"</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_height</span>=<span class="string">"20dp"</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:background</span>=<span class="string">"@color/colorPrimaryDark"</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:text</span>=<span class="string">"OK"</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:id</span>=<span class="string">"@+id/button"</span> /&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">android.support.v7.widget.LinearLayoutCompat</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="iOS属性设置"><a href="#iOS属性设置" class="headerlink" title="iOS属性设置"></a>iOS属性设置</h2><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[label setContentHuggingPriority:<span class="built_in">UILayoutPriorityDefaultLow</span> forAxis:<span class="built_in">UILayoutConstraintAxisHorizontal</span>];</span><br></pre></td></tr></table></figure>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/iOS/">iOS</a><a href="/tags/Android/">Android</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2017/01/12/Swift中单例的几种创建方式/" title="Swift中单例的几种创建方式" itemprop="url">Swift中单例的几种创建方式</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="wangxi" target="_blank" itemprop="author">wangxi</a>
+		
+  <p class="article-time">
+    <time datetime="2017-01-11T17:41:27.000Z" itemprop="datePublished"> Published 2017-01-12</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h1 id="单例"><a href="#单例" class="headerlink" title="单例"></a>单例</h1><h2 id="动画库Spring中，ImageLoader的单例实现"><a href="#动画库Spring中，ImageLoader的单例实现" class="headerlink" title="动画库Spring中，ImageLoader的单例实现"></a>动画库<code>Spring</code>中，ImageLoader的单例实现</h2><blockquote>
+<p><strong>Spring</strong> <a href="https://github.com/MengTo/Spring" target="_blank" rel="noopener">https://github.com/MengTo/Spring</a></p>
+</blockquote>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ImageLoader</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">var</span> <span class="title">sharedLoader</span>: <span class="title">ImageLoader</span> </span>&#123;</span><br><span class="line">        <span class="class"><span class="keyword">struct</span> <span class="title">Static</span> </span>&#123;</span><br><span class="line">            <span class="keyword">static</span> <span class="keyword">let</span> instance: <span class="type">ImageLoader</span> = <span class="type">ImageLoader</span>()</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="type">Static</span>.instance</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="类似于系统default的单例模式实现"><a href="#类似于系统default的单例模式实现" class="headerlink" title="类似于系统default的单例模式实现"></a>类似于系统<code>default</code>的单例模式实现</h2><blockquote>
+<p>Alamofire 中，SessionManager的default实现 <a href="https://github.com/Alamofire/Alamofire" target="_blank" rel="noopener">https://github.com/Alamofire/Alamofire</a></p>
+</blockquote>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">open</span> <span class="class"><span class="keyword">class</span> <span class="title">SessionManager</span> </span>&#123;</span><br><span class="line">   <span class="keyword">open</span> <span class="keyword">static</span> <span class="keyword">let</span> `<span class="keyword">default</span>`: <span class="type">SessionManager</span> = &#123;</span><br><span class="line">        <span class="keyword">let</span> configuration = <span class="type">URLSessionConfiguration</span>.<span class="keyword">default</span></span><br><span class="line">        configuration.httpAdditionalHeaders = <span class="type">SessionManager</span>.defaultHTTPHeaders</span><br><span class="line">        <span class="keyword">return</span> <span class="type">SessionManager</span>(configuration: configuration)</span><br><span class="line">   &#125;()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Swifter-Tips中所提到的单例实现"><a href="#Swifter-Tips中所提到的单例实现" class="headerlink" title="Swifter Tips中所提到的单例实现"></a>Swifter Tips中所提到的单例实现</h2><h3 id="Swift-3-之前的通常写法"><a href="#Swift-3-之前的通常写法" class="headerlink" title="Swift 3 之前的通常写法"></a>Swift 3 之前的通常写法</h3><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyManager</span> </span>&#123;</span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">var</span> <span class="title">sharedManager</span>: <span class="title">MyManager</span> </span>&#123;</span><br><span class="line">        <span class="class"><span class="keyword">struct</span> <span class="title">Static</span> </span>&#123;</span><br><span class="line">            <span class="keyword">static</span> <span class="keyword">var</span> onceToken: dispatch_once_t = <span class="number">0</span></span><br><span class="line">            <span class="keyword">static</span> <span class="keyword">var</span> staticInstance: <span class="type">MyManager?</span> = <span class="literal">nil</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        dispatch_once(&amp;<span class="type">Static</span>.onceToken) &#123;</span><br><span class="line">            <span class="type">Static</span>.staticInstance = <span class="type">MyManager</span>()</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="type">Static</span>.staticInstance!</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注: Swift 3 中移除了dispatch_once, 这种方式只对Swift 3 之前的版本有效。</p>
+</blockquote>
+<h3 id="同于Alamofire的方式"><a href="#同于Alamofire的方式" class="headerlink" title="同于Alamofire的方式"></a>同于Alamofire的方式</h3><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyManager</span> </span>&#123;</span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">var</span> <span class="title">shared</span>: <span class="title">MyManager</span> </span>&#123;</span><br><span class="line">        <span class="class"><span class="keyword">struct</span> <span class="title">Static</span> </span>&#123;</span><br><span class="line">            <span class="keyword">static</span> <span class="keyword">let</span> sharedInstance: <span class="type">MyManager</span> = <span class="type">MyManager</span>()</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="type">Static</span>.sharedInstance</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Swift-1-2-之前的最佳方法"><a href="#Swift-1-2-之前的最佳方法" class="headerlink" title="Swift 1.2 之前的最佳方法"></a>Swift 1.2 之前的最佳方法</h3><blockquote>
+<p>swift 1.2 之前 <code>class</code> 不支持存储格式的 <code>property</code>，定义一个只存在一份的属性时，只能定义在全局的 <strong>scrope</strong> 中。并且此变量只在当前文件中可以被访问。</p>
+</blockquote>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">let</span> sharedInstance = <span class="type">MyManager</span>()</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyManager</span> </span>&#123;</span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">var</span> <span class="title">shared</span>: <span class="title">MyManager</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> sharedInstance</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Swift-1-2-之后的改进"><a href="#Swift-1-2-之后的改进" class="headerlink" title="Swift 1.2 之后的改进"></a>Swift 1.2 之后的改进</h3><blockquote>
+<p>swift 1.2 之后，若无特别需求，推荐以下方式</p>
+</blockquote>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyManager</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">let</span> shared = <span class="type">MyManager</span>()</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">init</span>() &#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>变量初始化时，Apple将会把这个初始化包装在一次<code>swift_once_block_invoke</code>中以保证唯一性。所有的全局变量都会在底层使用类似<code>dispatch_once</code>的方式，确保只以<code>lazy</code>的方式初始化一次。</p>
+<p>标记<code>init</code>为私有方法保证了类型单例的唯一性</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/01/27/常用操作命令/" title="常用操作命令" itemprop="url">常用操作命令</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="wangxi" target="_blank" itemprop="author">wangxi</a>
+		
+  <p class="article-time">
+    <time datetime="2016-01-27T08:46:00.000Z" itemprop="datePublished"> Published 2016-01-27</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p><code>scp</code> 远程设备copy文件</p>
+<p><strong>scp ~/Desktop/file.zip username@ip_address:/var/tmp</strong></p>
+<pre><code>scp ~/Desktop/file.zip root@192.168.1.1:/var/tmp
+将桌面文件 file.zip 复制到目标设备的/var/tmp文件夹下
+
+scp root@192.168.1.1/var/mobile/Contents/Bundle/xxx.plist ~/Desktop
+将远程设备root用户下/var/mobile/Contents/Bundle/xxx.plist拷贝到本地桌面
+</code></pre><p><code>ps</code> 搜索进程</p>
+<pre><code>ps ax | grep XXXX
+</code></pre>
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Mac/">Mac</a><a href="/tags/Linux/">Linux</a><a href="/tags/Unix/">Unix</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/01/25/python日记/" title="python日记" itemprop="url">python日记</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="wangxi" target="_blank" itemprop="author">wangxi</a>
+		
+  <p class="article-time">
+    <time datetime="2016-01-24T16:54:42.000Z" itemprop="datePublished"> Published 2016-01-25</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>周末闲来无事，简单学习了一下Python，在做循环的时候，不论怎么调试修改，始终在编译的时候报错，也是比较郁闷。排查了制表符与空格的嫌疑之后，发现是自增运算符出现了问题，google之后才发现原来Python取消了<code>++</code>的运算方式,感觉比较好玩。</p>
+<p><strong>正如所言：</strong><em><code>只用一种方式解决问题</code></em></p>
+<p>看到这段儿代码时，深深地被吸引到了</p>
+<pre><code>def triangles():
+    b = [1]
+    while True:
+        yield b
+        b = [1] + [b[i] + b[i+1] for i in range(len(b)-1)] + [1]
+</code></pre>
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/python/">python</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/01/21/书单/" title="书单" itemprop="url">书单</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="wangxi" target="_blank" itemprop="author">wangxi</a>
+		
+  <p class="article-time">
+    <time datetime="2016-01-21T02:50:21.000Z" itemprop="datePublished"> Published 2016-01-21</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>一些比较有意思的书</p>
+<ul>
+<li>《MacTalk.人生元编程》无意间发现的，感觉名字挺有意思，还没看</li>
+</ul>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/书单/">书单</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/01/20/成长的阶梯/" title="Blogs" itemprop="url">Blogs</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="wangxi" target="_blank" itemprop="author">wangxi</a>
+		
+  <p class="article-time">
+    <time datetime="2016-01-20T11:17:32.000Z" itemprop="datePublished"> Published 2016-01-20</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h3 id="记录一些站点"><a href="#记录一些站点" class="headerlink" title="记录一些站点"></a>记录一些站点</h3><ul>
+<li><a href="https://objccn.io/" target="_blank" rel="noopener">https://objccn.io/</a></li>
+<li><a href="http://alisoftware.github.io" target="_blank" rel="noopener">alisoftware.github.io</a></li>
+<li><a href="http://swift.gg/about/" target="_blank" rel="noopener">swift.gg</a> 文章多来自国外优秀博客</li>
+<li><a href="http://casatwy.com/" target="_blank" rel="noopener">http://casatwy.com/</a></li>
+<li><a href="http://blog.xcatliu.com/" target="_blank" rel="noopener">http://blog.xcatliu.com/</a></li>
+<li><a href="http://blog.nswebfrog.com/" target="_blank" rel="noopener">http://blog.nswebfrog.com/</a></li>
+<li><a href="http://blog.dianqk.org/" target="_blank" rel="noopener">http://blog.dianqk.org/</a></li>
+<li><a href="http://williamzang.com/" target="_blank" rel="noopener">http://williamzang.com/</a></li>
+<li><a href="https://blog.cnbluebox.com/blog/archives/" target="_blank" rel="noopener">https://blog.cnbluebox.com/blog/archives/</a> </li>
+</ul>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/blogs/">blogs</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/01/17/Todo/" title="Todo" itemprop="url">Todo</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="wangxi" target="_blank" itemprop="author">wangxi</a>
+		
+  <p class="article-time">
+    <time datetime="2016-01-17T14:20:39.000Z" itemprop="datePublished"> Published 2016-01-17</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <ul>
+<li><a href="http://www.jianshu.com/p/02ab2b74c451" target="_blank" rel="noopener">iOS Cell异步图片加载优化机制详解</a></li>
+<li><a href="http://www.jianshu.com/p/3b2c95e1404f/" title="title" target="_blank" rel="noopener">iOS异步图片加载优化与常用开源库分析</a></li>
+</ul>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/todo/">todo</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/01/12/使用GithubPages-hexo的博客/" title="使用GithubPages+hexo的博客" itemprop="url">使用GithubPages+hexo的博客</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="wangxi" target="_blank" itemprop="author">wangxi</a>
+		
+  <p class="article-time">
+    <time datetime="2016-01-12T15:56:09.000Z" itemprop="datePublished"> Published 2016-01-12</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>#使用GithubPages+Hexo搭建的个人博客<br>在此之前，使用的是aws+wordpress，无奈自己又在aws上折腾别的，整个服务器上乱七八糟，所以此次决定采用GithubPages+Hexo的方式，来单独管理博客，哈，也比较省事儿了。</p>
+<p>关于如何使用Hexo搭建自己的博客，在网上又很多的教程这里贴一下我参考的</p>
+<ul>
+<li>hexo<a href="https://hexo.io/docs/index.html" target="_blank" rel="noopener">官网</a></li>
+<li><a href="http://ibruce.info/2013/11/22/hexo-your-blog/" target="_blank" rel="noopener">比较靠谱的教程</a></li>
+<li><a href="http://crazymilk.github.io/2015/12/28/GitHub-Pages-Hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/" target="_blank" rel="noopener">使用branch备份hexo文件</a></li>
+</ul>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+
+</div>
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+<div class="github-card">
+<p class="asidetitle">Github Card</p>
+<div class="github-card" data-github="WangXiaoxi" data-theme="medium"></div>
+<script type="text/javascript" src="//cdn.jsdelivr.net/github-cards/latest/widget.js" ></script>
+</div>
+
+
+
+  
+
+  
+<div class="tagslist">
+	<p class="asidetitle">Tags</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/todo/" title="todo">todo<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/iOS/" title="iOS">iOS<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Android/" title="Android">Android<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/python/" title="python">python<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/书单/" title="书单">书单<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Mac/" title="Mac">Mac<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Linux/" title="Linux">Linux<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Unix/" title="Unix">Unix<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/blogs/" title="blogs">blogs<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	
+	<section class="info">
+		<p> Hello ,I&#39;m WangXi. <br/>
+			This is my blog.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		
+		<a href="https://github.com/WangXiaoxi" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2019 
+		
+		<a href="/about" target="_blank" title="wangxi">wangxi</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?e6d1f421bbc9962127a50488f9ed37d1";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="Back to Top"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+ </html>
