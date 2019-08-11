@@ -4,25 +4,25 @@
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="UTF-8">
   
-    <title>Todo | 西境时光</title>
+    <title>UIView 与 CALayer | 西境时光</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="wangxi">
     
 
     
-    <meta name="description" content="iOS Cell异步图片加载优化机制详解 iOS异步图片加载优化与常用开源库分析">
-<meta name="keywords" content="todo">
+    <meta name="description" content="UIView VS CALayerUIView在 iOS 程序开发中，UIView 作为视图显示的基础组件，是用户交互的最主要的组成部分。主要包含以下职能：  内容绘制与动画 通过 UIKit 或 Core Graphics 绘制内容   布局与子视图管理 一个 View 可能包含 0 个或多个子 View 调整子视图的大小与位置 通过 AutoLayout 来约束视图之间的布局关系   事件相应">
+<meta name="keywords" content="iOS">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Todo">
-<meta property="og:url" content="http://fruitsbasket.cc/2016/01/17/Todo/index.html">
+<meta property="og:title" content="UIView 与 CALayer">
+<meta property="og:url" content="http://fruitsbasket.cc/2019/08/11/uiview&calayer/index.html">
 <meta property="og:site_name" content="西境时光">
-<meta property="og:description" content="iOS Cell异步图片加载优化机制详解 iOS异步图片加载优化与常用开源库分析">
+<meta property="og:description" content="UIView VS CALayerUIView在 iOS 程序开发中，UIView 作为视图显示的基础组件，是用户交互的最主要的组成部分。主要包含以下职能：  内容绘制与动画 通过 UIKit 或 Core Graphics 绘制内容   布局与子视图管理 一个 View 可能包含 0 个或多个子 View 调整子视图的大小与位置 通过 AutoLayout 来约束视图之间的布局关系   事件相应">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-08-11T09:05:14.202Z">
+<meta property="og:updated_time" content="2019-08-11T12:24:15.200Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Todo">
-<meta name="twitter:description" content="iOS Cell异步图片加载优化机制详解 iOS异步图片加载优化与常用开源库分析">
+<meta name="twitter:title" content="UIView 与 CALayer">
+<meta name="twitter:description" content="UIView VS CALayerUIView在 iOS 程序开发中，UIView 作为视图显示的基础组件，是用户交互的最主要的组成部分。主要包含以下职能：  内容绘制与动画 通过 UIKit 或 Core Graphics 绘制内容   布局与子视图管理 一个 View 可能包含 0 个或多个子 View 调整子视图的大小与位置 通过 AutoLayout 来约束视图之间的布局关系   事件相应">
 
     
     <link rel="alternative" href="/atom.xml" title="西境时光" type="application/atom+xml">
@@ -76,14 +76,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2016/01/17/Todo/" title="Todo" itemprop="url">Todo</a>
+      <a href="/2019/08/11/uiview&calayer/" title="UIView 与 CALayer" itemprop="url">UIView 与 CALayer</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="wangxi" target="_blank" itemprop="author">wangxi</a>
 		
   <p class="article-time">
-    <time datetime="2016-01-17T14:20:39.000Z" itemprop="datePublished"> Published 2016-01-17</time>
+    <time datetime="2019-08-11T09:53:35.127Z" itemprop="datePublished"> Published 2019-08-11</time>
     
   </p>
 </header>
@@ -92,14 +92,33 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">Contents</strong>
 		
-			
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#UIView-VS-CALayer"><span class="toc-number">1.</span> <span class="toc-text">UIView VS CALayer</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#UIView"><span class="toc-number">1.1.</span> <span class="toc-text">UIView</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CALayer"><span class="toc-number">1.2.</span> <span class="toc-text">CALayer</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Bounds"><span class="toc-number">1.3.</span> <span class="toc-text">Bounds</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Frame"><span class="toc-number">1.4.</span> <span class="toc-text">Frame</span></a></li></ol></li></ol>
 		
 		</div>
 		
-		<ul>
-<li><a href="http://www.jianshu.com/p/02ab2b74c451" target="_blank" rel="noopener">iOS Cell异步图片加载优化机制详解</a></li>
-<li><a href="http://www.jianshu.com/p/3b2c95e1404f/" title="title" target="_blank" rel="noopener">iOS异步图片加载优化与常用开源库分析</a></li>
-</ul>
+		<h2 id="UIView-VS-CALayer"><a href="#UIView-VS-CALayer" class="headerlink" title="UIView VS CALayer"></a>UIView VS CALayer</h2><h3 id="UIView"><a href="#UIView" class="headerlink" title="UIView"></a>UIView</h3><p>在 iOS 程序开发中，<code>UIView</code> 作为视图显示的基础组件，是用户交互的最主要的组成部分。主要包含以下职能：</p>
+<ol>
+<li>内容绘制与动画<ol>
+<li>通过 UIKit 或 Core Graphics 绘制内容</li>
+</ol>
+</li>
+<li>布局与子视图管理<ol>
+<li>一个 View 可能包含 0 个或多个子 View</li>
+<li>调整子视图的大小与位置</li>
+<li>通过 AutoLayout 来约束视图之间的布局关系</li>
+</ol>
+</li>
+<li>事件相应<ol>
+<li>作为 <code>UIResponder</code> 的子类，可以相应触摸或其它事件</li>
+<li>通过 <code>Gesture Recognizers</code> 实现常用的手势识别</li>
+</ol>
+</li>
+</ol>
+<h3 id="CALayer"><a href="#CALayer" class="headerlink" title="CALayer"></a>CALayer</h3><p>CALayer 常作为 UIView 的属性，实现内容绘制，不具备交互能力。CALayer 也包含自身的属性，如 background color、border、shadow。</p>
+<p>可以通过 position，size，transform 来实现一些动画。还可以通过实现 <a href="https://developer.apple.com/documentation/quartzcore/camediatiming" target="_blank" rel="noopener">CAMediaTiming</a> 协议完成稍复杂的动画。 </p>
+<p>通过 UIView 创建的 layer，view 会将自动将自己设置为 layer 的代理。</p>
+<h3 id="Bounds"><a href="#Bounds" class="headerlink" title="Bounds"></a>Bounds</h3><p>表示大小和位置，相对于自身的坐标系统。</p>
+<h3 id="Frame"><a href="#Frame" class="headerlink" title="Frame"></a>Frame</h3><p>表示大小和位置，相对于父视图的坐标系统。</p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -108,7 +127,7 @@
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/todo/">todo</a>
+  <span></span> <a href="/tags/iOS/">iOS</a>
   </div>
 
 </div>
@@ -117,7 +136,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://fruitsbasket.cc/2016/01/17/Todo/" data-title="Todo | 西境时光" data-tsina="null" class="share clearfix">
+	  <div data-url="http://fruitsbasket.cc/2019/08/11/uiview&calayer/" data-title="UIView 与 CALayer | 西境时光" data-tsina="null" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -130,19 +149,11 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2016/01/20/成长的阶梯/" title="Blogs">
-  <strong>上一篇：</strong><br/>
-  <span>
-  Blogs</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2016/01/12/使用GithubPages-hexo的博客/"  title="使用GithubPages+hexo的博客">
+<a href="/2017/01/19/iOS与Android中，给View设置优先级/"  title="iOS与Android中，给View设置优先级">
  <strong>下一篇：</strong><br/> 
- <span>使用GithubPages+hexo的博客
+ <span>iOS与Android中，给View设置优先级
 </span>
 </a>
 </div>
@@ -159,7 +170,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">Contents</strong>
  
- 
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#UIView-VS-CALayer"><span class="toc-number">1.</span> <span class="toc-text">UIView VS CALayer</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#UIView"><span class="toc-number">1.1.</span> <span class="toc-text">UIView</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CALayer"><span class="toc-number">1.2.</span> <span class="toc-text">CALayer</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Bounds"><span class="toc-number">1.3.</span> <span class="toc-text">Bounds</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Frame"><span class="toc-number">1.4.</span> <span class="toc-text">Frame</span></a></li></ol></li></ol>
  
   </div>
 

@@ -73,6 +73,83 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2019/08/11/uiview&calayer/" title="UIView 与 CALayer" itemprop="url">UIView 与 CALayer</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="wangxi" target="_blank" itemprop="author">wangxi</a>
+		
+  <p class="article-time">
+    <time datetime="2019-08-11T09:53:35.127Z" itemprop="datePublished"> Published 2019-08-11</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h2 id="UIView-VS-CALayer"><a href="#UIView-VS-CALayer" class="headerlink" title="UIView VS CALayer"></a>UIView VS CALayer</h2><h3 id="UIView"><a href="#UIView" class="headerlink" title="UIView"></a>UIView</h3><p>在 iOS 程序开发中，<code>UIView</code> 作为视图显示的基础组件，是用户交互的最主要的组成部分。主要包含以下职能：</p>
+<ol>
+<li>内容绘制与动画<ol>
+<li>通过 UIKit 或 Core Graphics 绘制内容</li>
+</ol>
+</li>
+<li>布局与子视图管理<ol>
+<li>一个 View 可能包含 0 个或多个子 View</li>
+<li>调整子视图的大小与位置</li>
+<li>通过 AutoLayout 来约束视图之间的布局关系</li>
+</ol>
+</li>
+<li>事件相应<ol>
+<li>作为 <code>UIResponder</code> 的子类，可以相应触摸或其它事件</li>
+<li>通过 <code>Gesture Recognizers</code> 实现常用的手势识别</li>
+</ol>
+</li>
+</ol>
+<h3 id="CALayer"><a href="#CALayer" class="headerlink" title="CALayer"></a>CALayer</h3><p>CALayer 常作为 UIView 的属性，实现内容绘制，不具备交互能力。CALayer 也包含自身的属性，如 background color、border、shadow。</p>
+<p>可以通过 position，size，transform 来实现一些动画。还可以通过实现 <a href="https://developer.apple.com/documentation/quartzcore/camediatiming" target="_blank" rel="noopener">CAMediaTiming</a> 协议完成稍复杂的动画。 </p>
+<p>通过 UIView 创建的 layer，view 会将自动将自己设置为 layer 的代理。</p>
+<h3 id="Bounds"><a href="#Bounds" class="headerlink" title="Bounds"></a>Bounds</h3><p>表示大小和位置，相对于自身的坐标系统。</p>
+<h3 id="Frame"><a href="#Frame" class="headerlink" title="Frame"></a>Frame</h3><p>表示大小和位置，相对于父视图的坐标系统。</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/iOS/">iOS</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2017/01/19/iOS与Android中，给View设置优先级/" title="iOS与Android中，给View设置优先级" itemprop="url">iOS与Android中，给View设置优先级</a>
   </h1>
   <p class="article-author">By
@@ -584,11 +661,11 @@ scp root@192.168.1.1/var/mobile/Contents/Bundle/xxx.plist ~/Desktop
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/todo/" title="todo">todo<sup>1</sup></a></li>
+				<li><a href="/tags/iOS/" title="iOS">iOS<sup>2</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/iOS/" title="iOS">iOS<sup>1</sup></a></li>
+				<li><a href="/tags/todo/" title="todo">todo<sup>1</sup></a></li>
 			
 		
 			
